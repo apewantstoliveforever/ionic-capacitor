@@ -233,12 +233,12 @@ export class CreateBookPage implements OnInit, AfterViewInit {
       // @ts-ignore
       this.webPaths.push(this.recording.webPath);
       // @ts-ignore
-      this.dataUrls.push(this.recording.dataUrl);
-      const audioElement = document.createElement('audio');
-      audioElement.controls = true; // Show playback controls
-      // audioElement. = this.recording.dataUrl;
-      // Append the audio element to the document or a specific container
-      document.body.appendChild(audioElement);
+      // this.dataUrls.push(this.recording.dataUrl);
+      // const url = window.URL.createObjectURL(new Blob([dataUrls], { type: 'audio/mp3' }));
+      // const audioElement = new Audio(url);
+      const audioRef = new Audio(`data:${this.recording.mimeType};base64,${this.recording.webPath}`)
+      audioRef.oncanplaythrough = () => audioRef.play()
+      audioRef.load()
   
     } catch (error) {
       console.error('recordingResult Error: ' + JSON.stringify(error));
