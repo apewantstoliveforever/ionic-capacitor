@@ -1,0 +1,44 @@
+{
+    "audioArray": [
+        {
+            "text": "Once upon a time, in a lush and vibrant meadow, there lived a tiny seed named Sam",
+            "start": 0,
+            "end": 5.016
+        },
+        {
+            "text": " Sam was nestled snugly in the rich soil, surrounded by tall grass and colorful flowers",
+            "start": 5.016,
+            "end": 10.440000000000001
+        },
+        {
+            "text": " Sam dreamed of adventure beyond the confines of the meadow, but as a seed, it seemed impossible",
+            "start": 10.440000000000001,
+            "end": 16.32
+        },
+        {
+            "text": "\n\nOne sunny morning, a gentle breeze whispered through the meadow, carrying Sam's wish to the wise old oak tree nearby",
+            "start": 16.32,
+            "end": 23.544
+        },
+        {
+            "text": " The oak tree chuckled softly and rustled its leaves in amusement",
+            "start": 23.544,
+            "end": 27.192
+        },
+        {
+            "text": " \"Ah, little seed,\" the oak tree said, \"Adventure is not just for the brave and bold",
+            "start": 27.192,
+            "end": 32.184
+        },
+        {
+            "text": " It's for those who dare to dream",
+            "start": 32.184,
+            "end": 33.912
+        },
+        {
+            "text": "\"",
+            "start": 33.912,
+            "end": 34.464
+        }
+    ]
+}

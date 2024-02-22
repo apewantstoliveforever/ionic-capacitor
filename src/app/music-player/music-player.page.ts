@@ -4,9 +4,10 @@ import { IonRange, IonContent } from "@ionic/angular";
 
 
 export interface Track {
+  id: number | null;
   name: string;
   path: string;
-  audioArray?: any[];
+  audioArray?: any;
 }
 
 @Component({
@@ -28,96 +29,22 @@ export class MusicPlayerPage implements OnInit {
 
   playlist: Track[] = [
     {
-      name: "Chapter 1",
-      path: "./assets/sounds/chapter1.mp3",
-    },
-    {
-      name: "Chapter 2",
-      path: "./assets/sounds/chapter2.mp3",
-    },
-    {
-      name: "Chapter 3",
-      path: "./assets/sounds/chapter3.mp3",
-    },
-    {
-      name: "Chapter 4",
-      path: "./assets/sounds/chapter4.mp3",
-    },
-    {
-      name: "Chapter 5",
-      path: "./assets/sounds/chapter5.mp3",
-    },
-    {
-      name: "Chapter 6",
-      path: "./assets/sounds/chapter6.mp3",
-    },
-    {
-      name: "Chapter 7",
-      path: "./assets/sounds/chapter7.mp3",
-    },
-    {
-      name: "Chapter 8",
-      path: "./assets/sounds/chapter8.mp3",
-    },
-    {
-      name: "Chapter 9",
-      path: "./assets/sounds/chapter9.mp3",
-    },
-    {
-      name: "Chapter 10",
-      path: "./assets/sounds/chapter10.mp3",
-    },
-    {
+      id: 1,
       name: "concatenated",
       path: "./assets/sounds/concatenated.mp3",
-      audioArray: [
-        {
-          "text": "Once upon a time, in a lush and vibrant meadow, there lived a tiny seed named Sam",
-          "start": 0,
-          "end": 5.016
-        },
-        {
-          "text": " Sam was nestled snugly in the rich soil, surrounded by tall grass and colorful flowers",
-          "start": 5.016,
-          "end": 10.440000000000001
-        },
-        {
-          "text": " Sam dreamed of adventure beyond the confines of the meadow, but as a seed, it seemed impossible",
-          "start": 10.440000000000001,
-          "end": 16.32
-        },
-        {
-          "text": "\n\nOne sunny morning, a gentle breeze whispered through the meadow, carrying Sam's wish to the wise old oak tree nearby",
-          "start": 16.32,
-          "end": 23.544
-        },
-        {
-          "text": " The oak tree chuckled softly and rustled its leaves in amusement",
-          "start": 23.544,
-          "end": 27.192
-        },
-        {
-          "text": " \"Ah, little seed,\" the oak tree said, \"Adventure is not just for the brave and bold",
-          "start": 27.192,
-          "end": 32.184
-        },
-        {
-          "text": " It's for those who dare to dream",
-          "start": 32.184,
-          "end": 33.912
-        },
-        {
-          "text": "\"",
-          "start": 33.912,
-          "end": 34.464
-        }
-      ]
+      audioArray: './assets/sounds/concatenated.json'
+    },
+    {
+      id: 2,
+      name: "The Curious Caterpillar",
+      path: "./assets/sounds/The Curious Caterpillar.mp3",
+      audioArray: './assets/sounds/The Curious Caterpillar.json'
     }
   ];
 
   activeParagraphIndex: number | null = null;
   activeParagraphText: string | undefined;
-  activeTrack: Track = { name: "", path: "", audioArray: [] };
+  activeTrack: Track = { id: null,  name: "", path: "", audioArray: "" };
   player: Howl | undefined;
   isPlaying = false;
   hiddenContent = false;
@@ -140,6 +67,16 @@ export class MusicPlayerPage implements OnInit {
         console.log("onplay");
         this.isPlaying = true;
         this.activeTrack = track;
+        const json = this.activeTrack.audioArray;
+        if (json) {
+          fetch(json)
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data.audioArray);
+              this.activeTrack.audioArray = data.audioArray;
+              // this.updateActiveParagraph(seekTime);
+            });
+        }
         this.updateProgress();
       },
       onend: () => {
@@ -199,6 +136,8 @@ export class MusicPlayerPage implements OnInit {
     const seekTime = (duration * newValue) / 100;
     this.player?.seek(seekTime);
     //scroll to paragraph
+    //open the json file
+
     if (this.activeTrack.audioArray) {
       for (let i = 0; i < this.activeTrack.audioArray.length; i++) {
         const audio = this.activeTrack.audioArray[i];
