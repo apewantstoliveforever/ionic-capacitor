@@ -213,7 +213,7 @@ export class CreateBookPage implements OnInit, AfterViewInit {
 
   async startRecording() {
     try {
-      const startRecordingResult = await VoiceRecorder.startRecording();
+      const startRecordingResult = await Microphone.startRecording();
       console.log('startRecordingResult: ' + JSON.stringify(startRecordingResult));
     } catch (error) {
       console.error('startRecordingResult Error: ' + JSON.stringify(error));
@@ -234,9 +234,14 @@ export class CreateBookPage implements OnInit, AfterViewInit {
       this.webPaths.push(this.recording.webPath);
       // @ts-ignore
       this.dataUrls.push(this.recording.dataUrl);
+      const audioElement = document.createElement('audio');
+      audioElement.controls = true; // Show playback controls
+      // audioElement. = this.recording.dataUrl;
+      // Append the audio element to the document or a specific container
+      document.body.appendChild(audioElement);
+  
     } catch (error) {
       console.error('recordingResult Error: ' + JSON.stringify(error));
     }
   }
-
 }

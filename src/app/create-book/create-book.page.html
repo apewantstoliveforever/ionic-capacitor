@@ -1,4 +1,4 @@
-<ion-header collapse="condense">
+<ion-header>
   <ion-toolbar>
     <ion-title size="large">create-book</ion-title>
     <ion-buttons slot="end">
@@ -19,7 +19,6 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <button (click)="showtheText()">Translate</button>
   <div #clickText></div>
   <div #selectableText (click)="handleSelection($event)">
     <!-- <button (click)="showtheText()">Translate</button> -->
@@ -63,13 +62,13 @@
       <ion-item-divider>
         <ion-label>Actions</ion-label>
       </ion-item-divider>
-
+<!-- 
       <ion-item button color="primary" (click)="checkPermissions()">
         <ion-label>Check Permissions</ion-label>
       </ion-item>
       <ion-item button color="secondary" (click)="requestPermissions()">
         <ion-label>Request Permissions</ion-label>
-      </ion-item>
+      </ion-item> -->
       <ion-item button color="tertiary" (click)="startRecording()">
         <ion-label>Start Recording</ion-label>
       </ion-item>
