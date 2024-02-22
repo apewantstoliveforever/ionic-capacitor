@@ -53,30 +53,32 @@ export class MusicPlayerPage implements OnInit {
   public currentTime = "0:00"; // Current playback time
   public totalDuration = "0:00"; // Total duration of the track
 
+  lyrics: any;
+
   @ViewChild("range", { static: false }) range!: IonRange;
 
 
   start(track: Track) {
+    const json = track.audioArray;
+    if (json) {
+      fetch(json)
+        .then((response) => response.json())
+        .then((data) => {
+          this.lyrics = data.audioArray;
+          // this.updateActiveParagraph(seekTime);
+        });
+    }
     if (this.player) {
       this.player.stop();
     }
+    this.activeTrack = track;
+    console.log("start", this.activeTrack);
     this.player = new Howl({
       src: [track.path],
       html5: true,
       onplay: () => {
         console.log("onplay");
         this.isPlaying = true;
-        this.activeTrack = track;
-        const json = this.activeTrack.audioArray;
-        if (json) {
-          fetch(json)
-            .then((response) => response.json())
-            .then((data) => {
-              console.log(data.audioArray);
-              this.activeTrack.audioArray = data.audioArray;
-              // this.updateActiveParagraph(seekTime);
-            });
-        }
         this.updateProgress();
       },
       onend: () => {
@@ -138,9 +140,9 @@ export class MusicPlayerPage implements OnInit {
     //scroll to paragraph
     //open the json file
 
-    if (this.activeTrack.audioArray) {
-      for (let i = 0; i < this.activeTrack.audioArray.length; i++) {
-        const audio = this.activeTrack.audioArray[i];
+    if (this.lyrics) {
+      for (let i = 0; i < this.lyrics.length; i++) {
+        const audio = this.lyrics[i];
         if (seekTime >= audio.start && seekTime <= audio.end) {
           if (this.activeParagraphIndex === i) {
             break;
@@ -161,9 +163,9 @@ export class MusicPlayerPage implements OnInit {
     this.currentTime = this.formatTime(Math.round(seek)); // Format current time
     this.totalDuration = this.formatTime(Math.round(this.player?.duration() || 0)); // Format total duration
     // console.log("updateProgress", this.progress, this.currentTime, this.totalDuration);
-    if (this.activeTrack.audioArray) {
-      for (let i = 0; i < this.activeTrack.audioArray.length; i++) {
-        const audio = this.activeTrack.audioArray[i];
+    if (this.lyrics) {
+      for (let i = 0; i < this.lyrics.length; i++) {
+        const audio = this.lyrics[i];
         if (seek >= audio.start && seek <= audio.end) {
           if (this.activeParagraphIndex === i) {
             break;
@@ -232,8 +234,8 @@ export class MusicPlayerPage implements OnInit {
 
   scrolltoParagraph(index: number) {
     this.activeParagraphIndex = index;
-    if (this.activeTrack) {
-      const paragraphArray = this.activeTrack.audioArray
+    if (this.lyrics) {
+      const paragraphArray = this.lyrics;
       if (paragraphArray) {
         const paragraph = paragraphArray[index];
         console.log(paragraph.text);
