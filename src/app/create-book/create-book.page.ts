@@ -20,6 +20,9 @@ export class CreateBookPage implements OnInit, AfterViewInit {
   timer: any = null;
   selectedRange: any;
 
+  private apiUrl = 'https://api-free.deepl.com/v2/translate';
+  private authKey = 'cc0935cc-04b8-4a00-afe9-fcd5e43f9300:fx'; // Replace with your actual API key
+
 
   constructor(private modalController: ModalController) { }
 
@@ -28,96 +31,97 @@ export class CreateBookPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // clearInterval(this.timer);
-    // const paragraphString = `Once upon a time in a quaint little village nestled at the edge of a vast forest, there lived two best friends
-    // named Luna and Milo. Luna was a spirited young girl with eyes as bright as the morning sun, and Milo was a
-    // mischievous boy with a heart as wild as the forest itself. Together, they shared a bond stronger than the tallest
-    // trees that surrounded their village.`;
-    // //array from the paragraph string
-    // const paragraphArray = paragraphString.split(' ');
-    // for (let i = 0; i < paragraphArray.length; i++) {
-    //   const word = paragraphArray[i];
-    //   const newWord = document.createElement('span');
-    //   newWord.textContent = word + ' ';
-    //   newWord.style.color = 'red';
-    //   newWord.style.backgroundColor = 'yellow';
-    //   newWord.style.fontWeight = 'bold';
-    //   // Add margin-bottom to create space between lines
-    //   newWord.style.marginBottom = '15px';
-    //   //add new word to the paragraph
-    //   console.log('this.selectableParagraph', this.selectableParagraph);
-    //   this.selectableParagraph.nativeElement.appendChild(newWord);
-    //   //add click event to the word
-    //   newWord.addEventListener('click', () => {
-    //     this.showTextRectangle(newWord);
-    //   });
-    // }
   }
 
   getSelectedRange = () => {
     try {
       if (window.getSelection) {
         this.selectedRange = window.getSelection()?.getRangeAt(0);
-        console.log('selectedRange', this.selectedRange);
+        // console.log('selectedRange', this.selectedRange);
       } else {
         this.selectedRange = document.getSelection()?.getRangeAt(0);
-        console.log('selectedRange', this.selectedRange);
+        // console.log('selectedRange', this.selectedRange);
       }
     } catch (err) { }
   };
-  showtheText() {
+  async showtheText() {
     //add text true to clickText
-    this.clickText.nativeElement.textContent = this.selectedRange?.toString();
-    this.clickText.nativeElement.style.display = 'block';
-    this.clickText.nativeElement.style.color = 'red';
-    this.clickText.nativeElement.style.backgroundColor = 'yellow';
+    // this.clickText.nativeElement.textContent = this.selectedRange?.toString();
+    // this.clickText.nativeElement.style.display = 'block';
+    // this.clickText.nativeElement.style.color = 'red';
+    // this.clickText.nativeElement.style.backgroundColor = 'yellow';
+    if (this.selectedRange) {
+      const rect = this.selectedRange?.getBoundingClientRect();
+      // Clear previously displayed rectangles
+      this.clearSelectionRectangles();
+      // Create a div for the rectangle
+      const rectangle = document.createElement('div');
+      rectangle.classList.add('selection-rectangle');
+      rectangle.textContent = this.selectedRange?.toString();
+      // Position the rectangle above the selected text within the #selectableText div
+      rectangle.style.top = `${rect?.top - this.selectableText.nativeElement.getBoundingClientRect().top}px`;
+      rectangle.style.border = '1px solid red';
+      rectangle.style.position = 'absolute';
+      rectangle.style.width = `${rect?.width}px + 10px`;
+      rectangle.style.height = `${rect?.height} + 10px`;
+      //left is in the middle of the text
+      rectangle.style.left = `${rect?.left - this.selectableText.nativeElement.getBoundingClientRect().left + (rect?.width / 2)}px`;
+      rectangle.style.maxWidth = '200px';
+      rectangle.style.backgroundColor = 'blue';
+      rectangle.style.zIndex = '1000';
+      // Append the rectangle to the #selectableText div
+      this.selectableText.nativeElement.appendChild(rectangle);
+      await this.translateText(this.selectedRange?.toString(), 'DE').then((res) => {
+        console.log('res', res);
+      });
+    }
   }
 
 
   async handleSelection(event: MouseEvent) {
 
-    let selection = null;
-    // console.log('sss', window.getSelection())
-    selection = window.getSelection()?.getRangeAt(0); // Get the selection range
-    // //get the selected text for  android
-    // console.log('selection', selection);
-    if (window.getSelection) {
-      selection = window.getSelection()?.getRangeAt(0);
-    } else if (typeof document.getSelection != "undefined") {
-      selection = document.getSelection()?.getRangeAt(0);
-      console.log('android');
-    }
-    console.log('handleSelection', selection);
+    // let selection = null;
+    // // console.log('sss', window.getSelection())
+    // selection = window.getSelection()?.getRangeAt(0); // Get the selection range
+    // // //get the selected text for  android
+    // // console.log('selection', selection);
+    // if (window.getSelection) {
+    //   selection = window.getSelection()?.getRangeAt(0);
+    // } else if (typeof document.getSelection != "undefined") {
+    //   selection = document.getSelection()?.getRangeAt(0);
+    //   console.log('android');
+    // }
+    // console.log('handleSelection', selection);
 
-    const selectedText = selection?.toString().trim(); // Get the selected text
-    if (selectedText) {
-      const rect = selection?.getBoundingClientRect(); // Get the position of the selected text
+    // const selectedText = selection?.toString().trim(); // Get the selected text
+    // if (selectedText) {
+    //   const rect = selection?.getBoundingClientRect(); // Get the position of the selected text
 
-      // Clear previously displayed rectangles
-      this.clearSelectionRectangles();
+    //   // Clear previously displayed rectangles
+    //   this.clearSelectionRectangles();
 
-      // Create a div for the rectangle
-      const rectangle = document.createElement('div');
-      rectangle.classList.add('selection-rectangle');
-      rectangle.textContent = selectedText;
+    //   // Create a div for the rectangle
+    //   const rectangle = document.createElement('div');
+    //   rectangle.classList.add('selection-rectangle');
+    //   rectangle.textContent = selectedText;
 
-      const textContent = await this.translateText(selectedText);
-      console.log('textContent', textContent);
+    //   // const textContent = await this.translateText(selectedText);
+    //   // console.log('textContent', textContent);
 
-      if (rect) {
-        // Position the rectangle above the selected text within the #selectableText div
-        rectangle.style.top = `${rect?.top - this.selectableText.nativeElement.getBoundingClientRect().top}px`;
-        rectangle.style.left = `${rect?.left - this.selectableText.nativeElement.getBoundingClientRect().left}px`;
-        rectangle.style.border = '1px solid red';
-        rectangle.style.position = 'absolute';
-        rectangle.style.width = `${rect?.width}px`;
-        rectangle.style.height = `${rect?.height}px`;
-        rectangle.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
-        rectangle.style.zIndex = '1000';
-        // Append the rectangle to the #selectableText div
-        this.selectableText.nativeElement.appendChild(rectangle);
-      }
-    }
+    //   if (rect) {
+    //     // Position the rectangle above the selected text within the #selectableText div
+    //     rectangle.style.top = `${rect?.top - this.selectableText.nativeElement.getBoundingClientRect().top}px`;
+    //     rectangle.style.left = `${rect?.left - this.selectableText.nativeElement.getBoundingClientRect().left}px`;
+    //     rectangle.style.border = '1px solid red';
+    //     rectangle.style.position = 'absolute';
+    //     rectangle.style.width = `${rect?.width}px`;
+    //     rectangle.style.height = `${rect?.height}px`;
+    //     rectangle.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
+    //     rectangle.style.zIndex = '1000';
+    //     // Append the rectangle to the #selectableText div
+    //     this.selectableText.nativeElement.appendChild(rectangle);
+    //   }
+    // }
   }
 
   showTextRectangle(textElement: any) {
@@ -151,20 +155,30 @@ export class CreateBookPage implements OnInit, AfterViewInit {
     existingRectangles.forEach((rectangle: { remove: () => any; }) => rectangle.remove());
   }
 
-  async translateText(textContent: string) {
-    const res = await fetch("https://libretranslate.com/translate", {
-      method: "POST",
-      body: JSON.stringify({
-        q: textContent,
-        source: "auto",
-        target: "en",
-        format: "text",
-        api_key: ""
-      }),
-      headers: { "Content-Type": "application/json" }
-    });
+  translateText(text: string, targetLang: string): Promise<any> {
+    const requestBody = {
+      text: [text],
+      target_lang: targetLang
+    };
 
-    console.log(await res.json());
+    return fetch(this.apiUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': `DeepL-Auth-Key ${this.authKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestBody)
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('Error translating text:', error);
+        throw error;
+      });
   }
 
   handleClick(text: string) {
