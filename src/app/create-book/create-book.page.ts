@@ -45,6 +45,7 @@ export class CreateBookPage implements OnInit, AfterViewInit {
     } catch (err) { }
   };
   async showtheText() {
+    console.log("swiper");
     //add text true to clickText
     // this.clickText.nativeElement.textContent = this.selectedRange?.toString();
     // this.clickText.nativeElement.style.display = 'block';

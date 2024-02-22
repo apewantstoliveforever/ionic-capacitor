@@ -1,41 +1,43 @@
 <ion-header collapse="condense">
   <ion-toolbar>
     <ion-title size="large">create-book</ion-title>
-    <ion-buttons slot="end" style="pointer-events: none;" onclick="translateTex()">
-      <ion-button fill="clear">
-        <ion-icon slot="icon-only" name="play-back-outline"></ion-icon>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" onclick="translateTex()">
+        <ion-icon slot="icon-only" name="language-outline"></ion-icon>
       </ion-button>
-      <ion-button fill="clear">
-        <ion-icon slot="icon-only" name="play-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="showtheText()">
+        <ion-icon slot="icon-only" name="keypad-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-
-  <div #clickText>
-
-  </div>
-
+  <div #clickText></div>
   <div #selectableText (click)="handleSelection($event)">
-    <button (click)="showtheText()">Translate</button>
+    <!-- <button (click)="showtheText()">Translate</button> -->
     <div #selectableText>
-      <p class="text-select">The Adventures of Luna and Milo: The Enchanted Forest</p>
+      <p class="text-select">
+        The Adventures of Luna and Milo: The Enchanted Forest
+      </p>
       <!-- <div #selectableParagraph class="selectable-paragraph">
 
     </div> -->
       <p class="text-select">
-        Once upon a time in a quaint little village nestled at the edge of a vast forest, there lived two best friends
-        named Luna and Milo. Luna was a spirited young girl with eyes as bright as the morning sun, and Milo was a
-        mischievous boy with a heart as wild as the forest itself. Together, they shared a bond stronger than the
-        tallest
-        trees that surrounded their village.
+        Once upon a time in a quaint little village nestled at the edge of a
+        vast forest, there lived two best friends named Luna and Milo. Luna was
+        a spirited young girl with eyes as bright as the morning sun, and Milo
+        was a mischievous boy with a heart as wild as the forest itself.
+        Together, they shared a bond stronger than the tallest trees that
+        surrounded their village.
       </p>
       <p class="text-select">
-        One sunny morning, Luna and Milo set out on an adventure into the heart of the Enchanted Forest. They had heard
-        tales of its wonders and mysteries, and they were determined to discover its secrets. With a map drawn by Milo
-        and
-        a sack full of snacks, they ventured forth, their hearts filled with excitement and curiosity.
+        One sunny morning, Luna and Milo set out on an adventure into the heart
+        of the Enchanted Forest. They had heard tales of its wonders and
+        mysteries, and they were determined to discover its secrets. With a map
+        drawn by Milo and a sack full of snacks, they ventured forth, their
+        hearts filled with excitement and curiosity.
       </p>
     </div>
   </div>
