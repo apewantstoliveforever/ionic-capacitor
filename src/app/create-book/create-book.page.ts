@@ -4,6 +4,7 @@ import { Microphone, AudioRecording } from '@mozartec/capacitor-microphone';
 // import createHttpProxyAgent from 'http-proxy-agent';
 import { ModalController } from '@ionic/angular';
 import { OpenModalComponent } from '../open-modal/open-modal.component';
+import axios from 'axios';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class CreateBookPage implements OnInit, AfterViewInit {
   timer: any = null;
   selectedRange: any;
   swiperText: string | undefined;
-  private apiUrl = 'https://api-free.deepl.com/v2/translate';
+  private apiUrl = 'https://37vcqk42-3000.asse.devtunnels.ms/translate';
   private authKey = 'cc0935cc-04b8-4a00-afe9-fcd5e43f9300:fx';
   recording!: AudioRecording;
   webPaths = [];
@@ -55,29 +56,35 @@ export class CreateBookPage implements OnInit, AfterViewInit {
     // this.clickText.nativeElement.style.color = 'red';
     // this.clickText.nativeElement.style.backgroundColor = 'yellow';
     if (this.selectedRange) {
-      const rect = this.selectedRange?.getBoundingClientRect();
-      // Clear previously displayed rectangles
-      this.clearSelectionRectangles();
-      // Create a div for the rectangle
-      const rectangle = document.createElement('div');
-      rectangle.classList.add('selection-rectangle');
-      rectangle.textContent = this.selectedRange?.toString();
+
       this.swiperText = this.selectedRange?.toString();
-      // Position the rectangle above the selected text within the #selectableText div
-      rectangle.style.top = `${rect?.top - this.selectableText.nativeElement.getBoundingClientRect().top}px`;
-      rectangle.style.border = '1px solid red';
-      rectangle.style.position = 'absolute';
-      rectangle.style.width = `${rect?.width}px + 10px`;
-      rectangle.style.height = `${rect?.height} + 10px`;
-      //left is in the middle of the text
-      rectangle.style.left = `${rect?.left - this.selectableText.nativeElement.getBoundingClientRect().left + (rect?.width / 2)}px`;
-      rectangle.style.maxWidth = '200px';
-      rectangle.style.backgroundColor = 'blue';
-      rectangle.style.zIndex = '1000';
+
       // Append the rectangle to the #selectableText div
-      this.selectableText.nativeElement.appendChild(rectangle);
-      await this.translateText(this.selectedRange?.toString(), 'DE').then((res) => {
-        console.log('res', res);
+      await this.translateText(this.selectedRange?.toString(), 'JA').then((res) => {
+        console.log('res', res.translations[0].text);
+        const translatedText = res.translations[0].text;
+        // Position the rectangle above the selected text within the #selectableText div
+        const rect = this.selectedRange?.getBoundingClientRect();
+        // Clear previously displayed rectangles
+        this.clearSelectionRectangles();
+        // Create a div for the rectangle
+        const rectangle = document.createElement('div');
+        rectangle.classList.add('selection-rectangle');
+
+        rectangle.textContent = translatedText
+
+        this.selectableText.nativeElement.appendChild(rectangle);
+
+        rectangle.style.top = `${rect?.top - this.selectableText.nativeElement.getBoundingClientRect().top}px`;
+        rectangle.style.border = '1px solid red';
+        rectangle.style.position = 'absolute';
+        rectangle.style.width = `${rect?.width}px + 10px`;
+        rectangle.style.height = `${rect?.height} + 10px`;
+        //left is in the middle of the text
+        rectangle.style.left = `${rect?.left - this.selectableText.nativeElement.getBoundingClientRect().left + (rect?.width / 2)}px`;
+        rectangle.style.maxWidth = '200px';
+        rectangle.style.backgroundColor = 'blue';
+        rectangle.style.zIndex = '1000';
       });
     }
   }
@@ -162,28 +169,18 @@ export class CreateBookPage implements OnInit, AfterViewInit {
 
   translateText(text: string, targetLang: string): Promise<any> {
     const requestBody = {
-      text: [text],
+      text: text,
       target_lang: targetLang
     };
-
-    return fetch(this.apiUrl, {
-      method: 'POST',
+    return axios.post(this.apiUrl, requestBody, {
       headers: {
-        'Authorization': `DeepL-Auth-Key ${this.authKey}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(requestBody)
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .catch(error => {
-        console.error('Error translating text:', error);
-        throw error;
-      });
+    }).then((response) => {
+      return response.data;
+    }).catch((error) => {
+      console.log('error', error);
+    });
   }
 
   handleClick(text: string) {

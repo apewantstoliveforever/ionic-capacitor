@@ -2,9 +2,9 @@
   <ion-toolbar>
     <ion-title size="large">create-book</ion-title>
     <ion-buttons slot="end">
-      <!-- <ion-button fill="clear" onclick="translateTex()">
+      <ion-button fill="clear" onclick="translateTex()">
         <ion-icon slot="icon-only" name="language-outline"></ion-icon>
-      </ion-button> -->
+      </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button fill="clear" (click)="showtheText()">
@@ -19,6 +19,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <button (click)="showtheText()">Translate</button>
   <div #clickText></div>
   <div #selectableText (click)="handleSelection($event)">
     <!-- <button (click)="showtheText()">Translate</button> -->
