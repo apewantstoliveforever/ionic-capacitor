@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-
+import { Microphone, AudioRecording } from '@mozartec/capacitor-microphone';
 // import { translate } from '@vitalets/google-translate-api';
 // import createHttpProxyAgent from 'http-proxy-agent';
 import { ModalController } from '@ionic/angular';
@@ -19,9 +19,12 @@ export class CreateBookPage implements OnInit, AfterViewInit {
   clickText!: ElementRef;
   timer: any = null;
   selectedRange: any;
-
+  swiperText: string | undefined;
   private apiUrl = 'https://api-free.deepl.com/v2/translate';
-  private authKey = 'cc0935cc-04b8-4a00-afe9-fcd5e43f9300:fx'; // Replace with your actual API key
+  private authKey = 'cc0935cc-04b8-4a00-afe9-fcd5e43f9300:fx';
+  recording!: AudioRecording;
+  webPaths = [];
+  dataUrls = []; // Replace with your actual API key
 
 
   constructor(private modalController: ModalController) { }
@@ -59,6 +62,7 @@ export class CreateBookPage implements OnInit, AfterViewInit {
       const rectangle = document.createElement('div');
       rectangle.classList.add('selection-rectangle');
       rectangle.textContent = this.selectedRange?.toString();
+      this.swiperText = this.selectedRange?.toString();
       // Position the rectangle above the selected text within the #selectableText div
       rectangle.style.top = `${rect?.top - this.selectableText.nativeElement.getBoundingClientRect().top}px`;
       rectangle.style.border = '1px solid red';
@@ -191,6 +195,8 @@ export class CreateBookPage implements OnInit, AfterViewInit {
     });
     await modal.present();
   }
+  getAudio() {
 
+  }
 
 }

@@ -41,3 +41,16 @@
     z-index: 9999;
     /* Ensure the rectangle appears on top of other content */
 }
+
+.boxShowText {
+    width: 100%;
+    height: auto;
+    background-color: white;
+    border: 1px solid silver;
+    border-radius: 1%;
+}
+.boxShowText p {
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}

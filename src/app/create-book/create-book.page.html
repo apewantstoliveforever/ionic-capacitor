@@ -11,6 +11,11 @@
         <ion-icon slot="icon-only" name="keypad-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="getAudio()">
+        <ion-icon slot="icon-only" name="mic-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -39,6 +44,9 @@
         drawn by Milo and a sack full of snacks, they ventured forth, their
         hearts filled with excitement and curiosity.
       </p>
+      <div class="boxShowText">
+        <p>{{swiperText}}</p>
+      </div>
     </div>
   </div>
 </ion-content>
