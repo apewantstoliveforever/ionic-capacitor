@@ -54,3 +54,13 @@
     font-weight: bold;
     text-align: center;
 }
+
+.custom-modal {
+    --height: 75%;
+    --border-radius: 24px 24px 0 0;
+  }
+  
+  .custom-modal::part(content) {
+    position: fixed;
+    bottom: 0;
+  }

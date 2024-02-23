@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Microphone, AudioRecording } from '@mozartec/capacitor-microphone';
-import {VoiceRecorder} from 'capacitor-voice-recorder'
+import { VoiceRecorder } from 'capacitor-voice-recorder'
 // import { translate } from '@vitalets/google-translate-api';
 // import createHttpProxyAgent from 'http-proxy-agent';
-import { ModalController } from '@ionic/angular';
+import {
+  ModalController, IonModal,
+} from '@ionic/angular';
 import { OpenModalComponent } from '../open-modal/open-modal.component';
 import axios from 'axios';
 
@@ -14,6 +16,7 @@ import axios from 'axios';
   styleUrls: ['./create-book.page.scss'],
 })
 export class CreateBookPage implements OnInit, AfterViewInit {
+  @ViewChild('modal', { static: false }) modal!: IonModal;
   @ViewChild('selectableText', { static: true })
   selectableText!: ElementRef;
   @ViewChild('selectableParagraph', { static: true }) selectableParagraph!: ElementRef;
@@ -27,6 +30,8 @@ export class CreateBookPage implements OnInit, AfterViewInit {
   recording!: AudioRecording;
   webPaths = [];
   dataUrls = []; // Replace with your actual API key
+  meaning: string | undefined;
+  selectedValue: string = 'vi'; // Default selected value
 
 
   constructor(private modalController: ModalController) { }
@@ -36,6 +41,10 @@ export class CreateBookPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+  }
+
+  openModalTranslate() {
+    this.modal.present();
   }
 
   getSelectedRange = () => {
@@ -64,28 +73,31 @@ export class CreateBookPage implements OnInit, AfterViewInit {
       await this.translateText(this.selectedRange?.toString(), 'JA').then((res) => {
         console.log('res', res.text);
         const translatedText = res.text;
-        // Position the rectangle above the selected text within the #selectableText div
-        const rect = this.selectedRange?.getBoundingClientRect();
-        // Clear previously displayed rectangles
-        this.clearSelectionRectangles();
-        // Create a div for the rectangle
-        const rectangle = document.createElement('div');
-        rectangle.classList.add('selection-rectangle');
+        //
+        this.meaning = translatedText;
+        // // Position the rectangle above the selected text within the #selectableText div
+        // const rect = this.selectedRange?.getBoundingClientRect();
+        // // Clear previously displayed rectangles
+        // this.clearSelectionRectangles();
+        // // Create a div for the rectangle
+        // const rectangle = document.createElement('div');
+        // rectangle.classList.add('selection-rectangle');
 
-        rectangle.textContent = translatedText
+        // rectangle.textContent = translatedText
 
-        this.selectableText.nativeElement.appendChild(rectangle);
+        // this.selectableText.nativeElement.appendChild(rectangle);
 
-        rectangle.style.top = `${rect?.top - this.selectableText.nativeElement.getBoundingClientRect().top}px`;
-        rectangle.style.border = '1px solid red';
-        rectangle.style.position = 'absolute';
-        rectangle.style.width = `${rect?.width}px + 10px`;
-        rectangle.style.height = `${rect?.height} + 10px`;
-        //left is in the middle of the text
-        rectangle.style.left = `${rect?.left - this.selectableText.nativeElement.getBoundingClientRect().left + (rect?.width / 2)}px`;
-        rectangle.style.maxWidth = '200px';
-        rectangle.style.backgroundColor = 'blue';
-        rectangle.style.zIndex = '1000';
+        // rectangle.style.top = `${rect?.top - this.selectableText.nativeElement.getBoundingClientRect().top}px`;
+        // rectangle.style.border = '1px solid red';
+        // rectangle.style.position = 'absolute';
+        // rectangle.style.width = `${rect?.width}px + 10px`;
+        // rectangle.style.height = `${rect?.height} + 10px`;
+        // //left is in the middle of the text
+        // rectangle.style.left = `${rect?.left - this.selectableText.nativeElement.getBoundingClientRect().left + (rect?.width / 2)}px`;
+        // rectangle.style.maxWidth = '200px';
+        // rectangle.style.backgroundColor = 'blue';
+        // rectangle.style.zIndex = '1000';
+        this.openModalTranslate();
       });
     }
   }
@@ -240,9 +252,16 @@ export class CreateBookPage implements OnInit, AfterViewInit {
       const audioRef = new Audio(`data:${this.recording.mimeType};base64,${this.recording.webPath}`)
       audioRef.oncanplaythrough = () => audioRef.play()
       audioRef.load()
-  
+
     } catch (error) {
       console.error('recordingResult Error: ' + JSON.stringify(error));
     }
+  }
+
+  // Function to handle ionChange event of ion-segment
+  segmentChanged(event: any) {
+    const selectedValue = event.detail.value;
+    console.log('selectedValue', selectedValue);
+    this.selectedValue = selectedValue;
   }
 }

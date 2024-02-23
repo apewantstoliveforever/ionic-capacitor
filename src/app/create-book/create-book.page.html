@@ -13,7 +13,7 @@
     </ion-buttons>
     <ion-buttons slot="end">
       <!-- <ion-button fill="clear" (click)="getAudio()"> -->
-        <ion-icon slot="icon-only" name="mic-outline"></ion-icon>
+      <ion-icon slot="icon-only" name="mic-outline"></ion-icon>
       <!-- </ion-button> -->
     </ion-buttons>
   </ion-toolbar>
@@ -51,7 +51,7 @@
   </div>
 </ion-content>
 
-<ion-content >
+<ion-content>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Home</ion-title>
@@ -62,7 +62,7 @@
       <ion-item-divider>
         <ion-label>Actions</ion-label>
       </ion-item-divider>
-<!-- 
+      <!-- 
       <ion-item button color="primary" (click)="checkPermissions()">
         <ion-label>Check Permissions</ion-label>
       </ion-item>
@@ -101,8 +101,41 @@
     </ion-item-group>
   </ion-list>
 </ion-content>
-<!-- <ion-modal class="custom-modal" #modal trigger="open-modal" canDismiss="true" [presentingElement]="presentingElement">
-  <div>
-    modal works
-  </div>
-</ion-modal> -->
+<!-- [presentingElement]="presentingElement" -->
+<ion-modal class="custom-modal" #modal trigger="open-modal" canDismiss="true">
+  <ng-template>
+    <div>
+      <div style="width: 100%; display: flex; flex-direction: row; justify-content: flex-end;">
+        <ion-button style="background-color: #323130; border-color: #323130;" color="white" class="cssBtnBack"
+          >
+          <ion-icon name="exit-outline" (click)="modal.dismiss()"></ion-icon>
+        </ion-button>
+      </div>
+      <div>
+        translate
+      </div>
+      <ion-segment color="success" value="vi" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="vi">
+          <ion-label>VN</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="en">
+          <ion-label>EN</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="chatgpt">
+          <ion-label>ChatGPT</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      <div class="detail">
+        <div class="vi-translation" [style.display]="selectedValue === 'vi' ? 'block' : 'none'">
+          {{meaning}}
+        </div>
+        <div class="en-translation" [style.display]="selectedValue === 'en' ? 'block' : 'none'">
+          English translation
+        </div>
+        <div class='chatgpt-translation' [style.display]="selectedValue === 'chatgpt' ? 'block' : 'none'">
+          ChatGPT translation
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ion-modal>
