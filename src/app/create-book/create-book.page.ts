@@ -46,6 +46,9 @@ export class CreateBookPage implements OnInit, AfterViewInit {
   openModalTranslate() {
     this.modal.present();
   }
+  exitModalTranslate() {
+    this.modal.dismiss();
+  }
 
   getSelectedRange = () => {
     try {

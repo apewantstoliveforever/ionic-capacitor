@@ -49,6 +49,7 @@
     border: 1px solid silver;
     border-radius: 1%;
 }
+
 .boxShowText p {
     color: black;
     font-weight: bold;
@@ -58,9 +59,37 @@
 .custom-modal {
     --height: 75%;
     --border-radius: 24px 24px 0 0;
-  }
-  
-  .custom-modal::part(content) {
+}
+
+.custom-modal::part(content) {
     position: fixed;
     bottom: 0;
-  }
+}
+
+.detail {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.detail div {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+// .vi-translation {
+//     background-color: #f0f0f0;
+//     /* Light gray background for Vietnamese translation */
+// }
+
+// .en-translation {
+//     background-color: #e0e0e0;
+//     /* Lighter gray background for English translation */
+// }
+
+// .chatgpt-translation {
+//     background-color: #d0d0d0;
+//     /* Even lighter gray background for ChatGPT translation */
+// }
