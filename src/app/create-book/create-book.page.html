@@ -6,15 +6,10 @@
         <ion-icon slot="icon-only" name="language-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" (click)="showSelectedText()">
       <ion-button fill="clear">
         <ion-icon slot="icon-only" name="keypad-outline"></ion-icon>
       </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <!-- <ion-button fill="clear" (click)="getAudio()"> -->
-      <ion-icon slot="icon-only" name="mic-outline"></ion-icon>
-      <!-- </ion-button> -->
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -44,7 +39,7 @@
         drawn by Milo and a sack full of snacks, they ventured forth, their
         hearts filled with excitement and curiosity.
       </p>
-      <div class="boxShowText">
+      <div class="boxShowText" *ngIf="isTextVisible">
         <p>{{swiperText}}</p>
       </div>
     </div>
@@ -83,7 +78,7 @@
       </ion-item-divider>
       <ion-item *ngFor="let webPath of webPaths">
         <audio controls>
-          <source src="{{webPath}}" type="{{recording?.mimeType}}">
+          <source src="{{webPath}}" type="{{recording?.mimeType}}" />
           Your browser does not support the audio element.
         </audio>
       </ion-item>
@@ -92,7 +87,10 @@
     <ion-item-group>
       <ion-item-divider>
         <ion-label>Data Urls (Verify on)</ion-label>
-        <ion-input value="https://base64.guru/converter/decode/audio" readonly></ion-input>
+        <ion-input
+          value="https://base64.guru/converter/decode/audio"
+          readonly
+        ></ion-input>
       </ion-item-divider>
       <ion-item *ngFor="let dataUrl of dataUrls">
         <ion-label position="floating">Data Url</ion-label>
@@ -105,16 +103,31 @@
 <ion-modal class="custom-modal" #modal trigger="open-modal" canDismiss="true">
   <ng-template>
     <div>
-      <div style="width: 100%; display: flex; flex-direction: row; justify-content: flex-end;">
-        <ion-button style="background-color: #323130; border-color: #323130;" color="white" class="cssBtnBack"
-        (click)="exitModalTranslate()" >
+      <div
+        style="
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+        "
+      >
+        <ion-button
+          style="border-color: #323130"
+          color="white"
+          class="cssBtnBack"
+          (click)="exitModalTranslate()"
+        >
           <ion-icon name="exit-outline"></ion-icon>
         </ion-button>
       </div>
       <!-- <div>
         translate
       </div> -->
-      <ion-segment color="success" value="vi" (ionChange)="segmentChanged($event)">
+      <ion-segment
+        color="success"
+        value="vi"
+        (ionChange)="segmentChanged($event)"
+      >
         <ion-segment-button value="vi">
           <ion-label>VN</ion-label>
         </ion-segment-button>
@@ -129,19 +142,41 @@
         </ion-segment-button>
       </ion-segment>
       <div class="detail">
-        <div class="vi-translation" [style.display]="selectedValue === 'vi' ? 'block' : 'none'">
+        <div
+          class="vi-translation"
+          [style.display]="selectedValue === 'vi' ? 'block' : 'none'"
+        >
           {{meaning}}
         </div>
-        <div class="en-translation" [style.display]="selectedValue === 'en' ? 'block' : 'none'">
+        <div
+          class="en-translation"
+          [style.display]="selectedValue === 'en' ? 'block' : 'none'"
+        >
           English translation
         </div>
-        <div class='chatgpt-translation' [style.display]="selectedValue === 'chatgpt' ? 'block' : 'none'">
+        <div
+          class="chatgpt-translation"
+          [style.display]="selectedValue === 'chatgpt' ? 'block' : 'none'"
+        >
           ChatGPT translation
         </div>
-        <div class='setting-translation' [style.display]="selectedValue === 'setting' ? 'block' : 'none'">
+        <div
+          class="setting-translation"
+          [style.display]="selectedValue === 'setting' ? 'block' : 'none'"
+        >
           Setting
         </div>
       </div>
     </div>
   </ng-template>
 </ion-modal>
+<ion-footer>
+  <div class="div_footer">
+    <button class="button_mic" (click)="toggleRecording()">
+      <ion-icon 
+        slot="icon-only"
+        [name]="micRecording ? 'mic-outline' : 'mic-off-outline'"
+      ></ion-icon>
+    </button>
+  </div>
+</ion-footer>

@@ -32,8 +32,8 @@ export class CreateBookPage implements OnInit, AfterViewInit {
   dataUrls = []; // Replace with your actual API key
   meaning: string | undefined;
   selectedValue: string = 'vi'; // Default selected value
-
-
+  isTextVisible: boolean = false;
+  micRecording: boolean = false;
   constructor(private modalController: ModalController) { }
 
   ngOnInit() {
@@ -70,7 +70,7 @@ export class CreateBookPage implements OnInit, AfterViewInit {
     // this.clickText.nativeElement.style.backgroundColor = 'yellow';
     if (this.selectedRange) {
 
-      this.swiperText = this.selectedRange?.toString();
+      
 
       // Append the rectangle to the #selectableText div
       await this.translateText(this.selectedRange?.toString(), 'JA').then((res) => {
@@ -266,5 +266,19 @@ export class CreateBookPage implements OnInit, AfterViewInit {
     const selectedValue = event.detail.value;
     console.log('selectedValue', selectedValue);
     this.selectedValue = selectedValue;
+  }
+  showSelectedText() {
+    this.swiperText = this.selectedRange?.toString();
+    this.isTextVisible = true;
+  }
+  toggleRecording() {
+    this.micRecording = !this.micRecording;
+    if (this.micRecording) {
+      // Gọi hàm khi bắt đầu ghi âm (startRecording())
+      this.startRecording();
+    } else {
+      // Gọi hàm khi kết thúc ghi âm (stopRecording())
+      this.stopRecording();
+    }
   }
 }
