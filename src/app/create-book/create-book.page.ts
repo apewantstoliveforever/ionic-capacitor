@@ -62,8 +62,8 @@ export class CreateBookPage implements OnInit, AfterViewInit {
 
       // Append the rectangle to the #selectableText div
       await this.translateText(this.selectedRange?.toString(), 'JA').then((res) => {
-        console.log('res', res.translations[0].text);
-        const translatedText = res.translations[0].text;
+        console.log('res', res.text);
+        const translatedText = res.text;
         // Position the rectangle above the selected text within the #selectableText div
         const rect = this.selectedRange?.getBoundingClientRect();
         // Clear previously displayed rectangles
@@ -178,6 +178,7 @@ export class CreateBookPage implements OnInit, AfterViewInit {
         'Content-Type': 'application/json',
       },
     }).then((response) => {
+      console.log('response', response.data);
       return response.data;
     }).catch((error) => {
       console.log('error', error);
