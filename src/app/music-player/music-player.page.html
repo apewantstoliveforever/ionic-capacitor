@@ -14,6 +14,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content scroll-y="false">
+  
   <div class="background-image">
     <!-- Nội dung ảnh dưới ion-content danh sách -->
     <div class="image-content">
@@ -135,6 +136,7 @@
           <ion-icon slot="icon-only" name="play-skip-forward"></ion-icon>
         </ion-button>
       </ion-col>
+
       <ion-col size="12" class="ion-text-center_end">
         <div class="restart-button-container">
           <ion-button fill="clear" (click)="restart()" class="footer_button">
@@ -171,15 +173,12 @@
           </ion-button>
           <span>Tốc độ</span>
         </div>
+
         <div class="restart-button-container">
-          <ion-button fill="clear" class="footer_button">
-            <div class="restart-button-container">
-              <ion-button fill="clear" class="footer_button">
-                <ion-icon name="folder-outline"></ion-icon>
-              </ion-button>
-              <span>File đính kèm</span>
-            </div>
+          <ion-button fill="clear" class="footer_button" (click)="settingBackground()">
+            <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
           </ion-button>
+          <span>Setting</span>
         </div>
       </ion-col>
     </ion-row>

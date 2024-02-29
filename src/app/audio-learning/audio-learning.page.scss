@@ -1,0 +1,23 @@
+ion-item {
+    border: 1px solid #ddd; 
+    width: 130px;
+    height: 130px;/* Đường viền xung quanh mỗi ion-item */
+    border-radius: 10px; /* Bo góc của ion-item */
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;/* Đảm bảo nội dung không bị tràn ra khỏi ion-item */
+  
+    ion-img {
+      width: 80%; /* Đảm bảo hình ảnh chiếm đầy đủ chiều rộng của ion-item */
+      height: 80%; /* Điều chỉnh chiều cao của hình ảnh */
+      object-fit: cover; /* Hiển thị hình ảnh mà không làm biến dạng nó */
+    }
+  
+    ion-text {
+      display: block;
+      text-align: center; /* Căn giữa văn bản */
+      padding: 10px; /* Khoảng cách giữa văn bản và đường viền của ion-item */
+    //   font-weight: bold; /* Đặt độ đậm cho văn bản */
+    }
+  }
+  

@@ -1,8 +1,7 @@
 .text-select {
-    max-height: 400px;
-    overflow-y: auto;
+  max-height: 400px;
+  overflow-y: auto;
 }
-
 
 // ion-content {
 //     -webkit-touch-callout: text !important;
@@ -22,7 +21,6 @@
 //     user-select: text !important;
 // }
 
-
 // html.plt-mobile ion-app {
 //     -webkit-user-select: text;
 //     -moz-user-select: text;
@@ -31,52 +29,52 @@
 // }
 
 .selection-rectangle {
-    position: absolute;
-    border: 2px solid red;
-    /* Adjust the border style as needed */
-    background-color: blue;
-    /* Adjust the background color as needed */
-    padding: 5px;
-    border-radius: 5px;
-    z-index: 9999;
-    /* Ensure the rectangle appears on top of other content */
+  position: absolute;
+  border: 2px solid red;
+  /* Adjust the border style as needed */
+  background-color: blue;
+  /* Adjust the background color as needed */
+  padding: 5px;
+  border-radius: 5px;
+  z-index: 9999;
+  /* Ensure the rectangle appears on top of other content */
 }
 
 .boxShowText {
-    width: 100%;
-    height: auto;
-    background-color: white;
-    border: 1px solid silver;
-    border-radius: 1%;
+  width: 100%;
+  height: auto;
+  background-color: white;
+  border: 1px solid silver;
+  border-radius: 1%;
 }
 
 .boxShowText p {
-    color: black;
-    font-weight: bold;
-    text-align: center;
+  color: black;
+  font-weight: bold;
+  text-align: center;
 }
 
 .custom-modal {
-    --height: 75%;
-    --border-radius: 24px 24px 0 0;
+  --height: 75%;
+  --border-radius: 24px 24px 0 0;
 }
 
 .custom-modal::part(content) {
-    position: fixed;
-    bottom: 0;
+  position: fixed;
+  bottom: 0;
 }
 
 .detail {
-    margin-top: 20px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .detail div {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 // .vi-translation {
@@ -94,25 +92,89 @@
 //     /* Even lighter gray background for ChatGPT translation */
 // }
 .div_footer {
-    height: 70px;
-    width: 100%;
-    background-color: #ccc;
-    padding: 2px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-bottom: 5px;
+  height: 70px;
+  width: 100%;
+  background-color: #ccc;
+  padding: 2px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button_mic {
+  background-color: aqua;
+  width: 50px;
+  height: 50px;
+  border: 10px solid white;
+  border-radius: 50%;
+}
+.button_mic ion-icon {
+  color: black;
+  font-size: 25px;
+}
+
+.custom-modal-text {
+  width: 100%;
+//   height: 90px;
+  // position: fixed;
+}
+
+.day_night {
+  width: 100%;
+  height: 33%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  // border: 15px solid rgba(219, 203, 202, 0.5); /* Sử dụng rgba để thiết lập màu với đ�� trong suốt */
+  // border-radius: 50%;
+  .day {
+    height: 100%;
+    width: 50%; /* Đảm bảo chiều cao của div đủ để chứa nút */
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 0.5px solid grey;
+  }
+  .night {
+    height: 100%;
+    width: 50%; /* Đảm bảo chiều cao của div đủ để chứa nút */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.5px solid grey;
+  }
 }
-.button_mic {
-    background-color: aqua;
-    width: 50px;
-    height: 50px;
-    border: 10px solid white;
-    border-radius: 50%;
+
+.style_text {
+
+  width: 100%;
+  height: 33%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  // margin-top: 10px;
 }
-.button_mic ion-icon {
-    color: black;
-    font-size: 25px;
+
+.size_font {
+  width: 100%;
+  height: 33%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // background-color: red;
+//   margin-top: 6rem;
+}
+ion-range {
+  width: 70%; /* Thiết lập chiều rộng mong muốn, có thể thay đổi giá trị này */
+  max-width: 100%; /* Giới hạn chiều rộng tối đa nếu cần thiết */
+}
+
+ion-range::part(slider) {
+  height: 10px; /* Chiều cao thanh trượt, có thể thay đổi giá trị này */
+  background-color: #34eb64; /* Màu sắc của thanh trượt */
+}
+ion-range::part(knob) {
+  background-color: #34eb64; /* Màu sắc của chấm (knob) */
 }

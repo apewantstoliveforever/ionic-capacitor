@@ -11,6 +11,11 @@
         <ion-icon slot="icon-only" name="keypad-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-buttons slot="end" (click)="openModalText()">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="keypad-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -170,10 +175,53 @@
     </div>
   </ng-template>
 </ion-modal>
+<ion-modal
+  class="custom-modal-text"
+  #modalText
+  trigger="open-modalText"
+  canDismiss="true"
+>
+  <ng-template>
+    <div class="day_night">
+      <div class="day">
+        <ion-button col>
+          <ion-icon slot="icon-only" name="sunny-outline"></ion-icon>
+          <span>Day</span>
+        </ion-button>
+      </div>
+      <div class="night">
+        <ion-button>
+          <ion-icon slot="icon-only" name="sunny-outline"></ion-icon>
+          <span>night</span>
+        </ion-button>
+      </div>
+    </div>
+    <div class="style_text">
+      <ion-button>
+        <span>Andada</span>
+      </ion-button>
+      <ion-button>
+        <span>Lato</span>
+      </ion-button>
+      <ion-button>
+        <span>Lora</span>
+      </ion-button>
+      <ion-button>
+        <span>Raleway</span>
+      </ion-button>
+    </div>
+    <div class="size_font">
+      <ion-range aria-label="Range with ticks" [ticks]="true" [snaps]="true" [min]="0" [max]="5">
+        <ion-icon slot="start" name="text-outline"></ion-icon>
+        <ion-icon slot="end" name="text-outline"></ion-icon>
+      </ion-range>
+    </div>
+  </ng-template>
+</ion-modal>
 <ion-footer>
   <div class="div_footer">
     <button class="button_mic" (click)="toggleRecording()">
-      <ion-icon 
+      <ion-icon
         slot="icon-only"
         [name]="micRecording ? 'mic-outline' : 'mic-off-outline'"
       ></ion-icon>

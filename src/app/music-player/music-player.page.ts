@@ -21,12 +21,10 @@ export class MusicPlayerPage implements OnInit {
   myContent!: IonContent;
 
   @ViewChild('scrollableList') scrollableList: any;
-
-
   ngOnInit() {
 
   }
-
+  
   playlist: Track[] = [
     {
       id: 1,
@@ -242,5 +240,8 @@ export class MusicPlayerPage implements OnInit {
         this.activeParagraphText = paragraph.text;
       }
     }
+  }
+  settingBackground() {
+
   }
 }

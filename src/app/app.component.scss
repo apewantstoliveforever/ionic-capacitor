@@ -4,3 +4,16 @@
 //     -ms-user-select: text;
 //     user-select: auto;
 // }
+ion-range {
+    // --bar-background: #a2d2ff;
+    // --bar-background-active: #bde0fe;
+    --bar-height: 8px;
+    --bar-border-radius: 8px;
+    --knob-background: green;
+    --knob-size: 40px;
+    --pin-background: green;
+    --pin-color: #fff;
+  }
+p {
+  font-family: Lato;
+}

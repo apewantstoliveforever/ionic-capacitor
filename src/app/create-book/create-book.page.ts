@@ -17,6 +17,7 @@ import axios from 'axios';
 })
 export class CreateBookPage implements OnInit, AfterViewInit {
   @ViewChild('modal', { static: false }) modal!: IonModal;
+  @ViewChild('modalText', { static: false }) modalText!: IonModal;
   @ViewChild('selectableText', { static: true })
   selectableText!: ElementRef;
   @ViewChild('selectableParagraph', { static: true }) selectableParagraph!: ElementRef;
@@ -49,7 +50,9 @@ export class CreateBookPage implements OnInit, AfterViewInit {
   exitModalTranslate() {
     this.modal.dismiss();
   }
-
+  openModalText() {
+    this.modalText.present();
+  }
   getSelectedRange = () => {
     try {
       if (window.getSelection) {

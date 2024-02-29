@@ -1,0 +1,59 @@
+[
+    {
+      "id": 1,
+      "name": "nose",
+      "audio": "audio1.mp3",
+      "path": "/assets/sounds/tosmell.mp3",
+      "image": "/assets/picture-audio/nose.jpg",
+      "description": "to smell"
+    },
+    {
+      "id": 2,
+      "name": "eye",
+      "audio": "audio2.mp3",
+      "path": "/assets/sounds/tosee.mp3",
+      "image": "/assets/picture-audio/eye.jpg",
+      "description": "to see"
+    },
+    {
+      "id": 3,
+      "name": "tongue",
+      "audio": "audio3.mp3",
+      "path": "/assets/sounds/totaste.mp3",
+      "image": "/assets/picture-audio/tongue.jpg",
+      "description": "to taste"
+    },
+    {
+      "id": 4,
+      "name": "ear",
+      "audio": "audio4.mp3",
+      "path": "/assets/sounds/audio4.mp3",
+      "image": "/assets/picture-audio/ear.jpg",
+      "description": "to hear"
+    },
+    {
+      "id": 5,
+      "name": "hair",
+      "audio": "audio5.mp3",
+      "path": "/assets/sounds/audio5.mp3",
+      "image": "/assets/picture-audio/hair.jpg",
+      "description": "to move quickly"
+    },
+    {
+      "id": 6,
+      "name": "touch",
+      "audio": "audio6.mp3",
+      "path": "/assets/sounds/audio6.mp3",
+      "image": "/assets/picture-audio/touch.jpg",
+      "description": "to feel by contact"
+    },
+    {
+      "id": 7,
+      "name": "face",
+      "audio": "audio7.mp3",
+      "path": "/assets/sounds/audio7.mp3",
+      "image": "/assets/picture-audio/face.jpg",
+      "description": "to face "
+    }
+  ]
+  

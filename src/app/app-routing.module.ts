@@ -18,7 +18,8 @@ const routes: Routes = [
   {
     path: 'music-player',
     loadChildren: () => import('./music-player/music-player.module').then( m => m.MusicPlayerPageModule)
-  },  {
+  },
+  {
     path: 'concat-audio',
     loadChildren: () => import('./concat-audio/concat-audio.module').then( m => m.ConcatAudioPageModule)
   },
@@ -30,6 +31,15 @@ const routes: Routes = [
     path: 'create-book',
     loadChildren: () => import('./create-book/create-book.module').then( m => m.CreateBookPageModule)
   },
+  {
+    path: 'translate',
+    loadChildren: () => import('./translate/translate.module').then( m => m.TranslatePageModule)
+  },  {
+    path: 'audio-learning',
+    loadChildren: () => import('./audio-learning/audio-learning.module').then( m => m.AudioLearningPageModule)
+  },
+
+
 
 ];
 
