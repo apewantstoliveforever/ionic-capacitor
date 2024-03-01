@@ -27,7 +27,7 @@
       "id": 4,
       "name": "ear",
       "audio": "audio4.mp3",
-      "path": "/assets/sounds/audio4.mp3",
+      "path": "/assets/sounds/tohear.mp3",
       "image": "/assets/picture-audio/ear.jpg",
       "description": "to hear"
     },
@@ -35,15 +35,15 @@
       "id": 5,
       "name": "hair",
       "audio": "audio5.mp3",
-      "path": "/assets/sounds/audio5.mp3",
+      "path": "/assets/sounds/tohair.mp3",
       "image": "/assets/picture-audio/hair.jpg",
-      "description": "to move quickly"
+      "description": "to hair"
     },
     {
       "id": 6,
       "name": "touch",
       "audio": "audio6.mp3",
-      "path": "/assets/sounds/audio6.mp3",
+      "path": "/assets/sounds/touch.mp3",
       "image": "/assets/picture-audio/touch.jpg",
       "description": "to feel by contact"
     },
@@ -51,7 +51,7 @@
       "id": 7,
       "name": "face",
       "audio": "audio7.mp3",
-      "path": "/assets/sounds/audio7.mp3",
+      "path": "/assets/sounds/toface.mp3",
       "image": "/assets/picture-audio/face.jpg",
       "description": "to face "
     }
